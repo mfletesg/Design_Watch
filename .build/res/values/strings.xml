@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<resources>
+  <string name="app_name">Puma</string>
+  <string name="watchface_title">Puma</string>
+  <string name="schemeVersion">1.3.0</string>
+</resources>

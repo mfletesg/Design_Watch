@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.samsung.android.wearable.watchfacestudio" android:versionCode="1" android:versionName="1.0.0">
+  <uses-sdk android:minSdkVersion="28" android:targetSdkVersion="30"/>
+  <uses-permission android:name="android.permission.WAKE_LOCK"/>
+  <uses-permission android:name="com.samsung.android.watch.watchface.hideinformation.setting.READ_HIDE_INFORMATION"/>
+  <uses-permission android:name="com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"/>
+  <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+  <uses-permission android:name="android.permission.VIBRATE"/>
+  <uses-permission android:name="android.permission.BODY_SENSORS"/>
+  <uses-permission android:name="com.samsung.android.watch.watchface.companionhelper.READ_DATABASE"/>
+  <uses-permission android:name="com.samsung.android.watch.watchface.companionhelper.WRITE_DATABASE"/>
+  <uses-permission android:name="com.google.android.wearable.permission.BIND_WATCH_FACE_CONTROL"/>
+  <uses-permission android:name="com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"/>
+  <uses-feature android:name="android.hardware.type.watch"/>
+  <uses-feature android:name="android.hardware.sensor.heartrate" android:required="true"/>
+  <queries>
+    <package android:name="com.samsung.android.watch.watchface.companionhelper"/>
+    <package android:name="com.samsung.android.watch.watchface.companionhelper"/>
+    <intent>
+      <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST"/>
+    </intent>
+    <intent>
+      <action android:name="android.intent.action.MAIN"/>
+      <category android:name="android.intent.category.LAUNCHER"/>
+    </intent>
+    <intent>
+      <action android:name="androidx.wear.tiles.action.BIND_UPDATE_REQUESTER"/>
+    </intent>
+  </queries>
+  <application android:allowBackup="true" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:icon="@drawable/preview" android:label="@string/app_name" android:supportsRtl="true" android:theme="@android:style/Theme.Translucent.NoTitleBar">
+    <meta-data android:name="com.google.android.wearable.standalone" android:value="true"/>
+    <meta-data android:name="com.samsung.android.watchfacestudio.runtime" android:value="com.samsung.android.wearable.watchfacestudio"/>
+    <meta-data android:name="com.samsung.watchfacestudio.version" android:value="1.2.5"/>
+    <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+    <meta-data android:name="com.bumptech.glide.integration.webp.WebpGlideModule" android:value="GlideModule"/>
+    <service android:name="com.samsung.android.wearable.watchfacestudio.WatchFaceStudioRuntime" android:directBootAware="false" android:label="@string/watchface_title" android:permission="android.permission.BIND_WALLPAPER">
+      <meta-data android:name="android.service.wallpaper" android:resource="@xml/watch_face"/>
+      <meta-data android:name="com.google.android.wearable.watchface.preview" android:resource="@drawable/preview"/>
+      <meta-data android:name="com.google.android.wearable.watchface.preview_circular" android:resource="@drawable/preview_circular"/>
+      <meta-data android:name="android.service.wallpaper.square_mode" android:value="true"/>
+      <meta-data android:name="com.google.android.wearable.watchface.companionBuiltinConfigurationEnabled" android:value="true"/>
+      <meta-data android:name="com.google.android.wearable.watchface.wearableConfigurationAction" android:value="androidx.wear.watchface.editor.action.WATCH_FACE_EDITOR"/>
+      <meta-data android:name="androidx.wear.watchface.MULTIPLE_INSTANCES_ALLOWED" android:value="true"/>
+      <meta-data android:name="com.samsung.android.watch.watchface.config.vi.launching" android:value="1"/>
+      <meta-data android:name="com.samsung.android.watch.watchface.config.vi.launching.REQUIRE_PREVIEW" android:value="true"/>
+      <intent-filter>
+        <action android:name="android.service.wallpaper.WallpaperService"/>
+        <category android:name="com.google.android.wearable.watchface.category.WATCH_FACE"/>
+      </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED"/>
+      </intent-filter>
+    </service>
+    <service android:name="androidx.wear.watchface.control.WatchFaceControlService" android:enabled="@bool/watch_face_instance_service_enabled" android:exported="true" android:permission="com.google.android.wearable.permission.BIND_WATCH_FACE_CONTROL">
+      <meta-data android:name="androidx.wear.watchface.api_version" android:value="5"/>
+      <meta-data android:name="androidx.wear.watchface.xml_version" android:value="@integer/watch_face_xml_version"/>
+      <intent-filter>
+        <action android:name="com.google.android.wearable.action.WATCH_FACE_CONTROL"/>
+      </intent-filter>
+    </service>
+    <activity android:name="com.samsung.android.wearable.watchfacestudio.editor.EditorActivity" android:label="Config Activity" android:theme="@style/Transparent">
+      <intent-filter>
+        <action android:name="androidx.wear.watchface.editor.action.WATCH_FACE_EDITOR"/>
+        <category android:name="com.google.android.wearable.watchface.category.WEARABLE_CONFIGURATION"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+      </intent-filter>
+    </activity>
+    <activity android:name="com.samsung.android.wearable.watchfacestudio.PermissionActivity"/>
+    <activity android:name="com.google.android.gms.common.api.GoogleApiActivity" android:exported="false" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+    <activity android:name="androidx.wear.watchface.ComplicationHelperActivity" android:excludeFromRecents="true" android:exported="false" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+    <receiver android:name="com.samsung.watchface.debug.DebugBroadcastReceiver">
+      <intent-filter>
+        <action android:name="com.samsung.watchface.DEBUG_WATCH_FACE"/>
+      </intent-filter>
+    </receiver>
+    <uses-library android:name="com.google.android.wearable" android:required="false"/>
+  </application>
+</manifest>
